@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">  
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>admin_form_carga_horarios_fun_desde_archivo.xhtml</h2>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h:form id="form" enctype="multipart/form-data">
+
+                            <div class="panel panel-body">                           
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">                                            
+                                        <h:inputFile id="subir" value="#{funcionariosMB.file}">
+                                            <f:ajax listener="#{funcionariosMB.leerArchivoHorariosFuncionarios()}" render="@form" execute="@form"/>
+                                        </h:inputFile>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-12 text-primary"><h5>Detalles del archivo</h5></div>
+                                        </div>    
+                                        <div class="row">
+                                            <div class="col-sm-4">Nombre del archivo seleccionado</div>
+                                            <div class="col-sm-8 text-primary">#{funcionariosMB.nombreArchivo}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">Cantidad de registros </div>
+                                            <div class="col-sm-8 text-primary">#{funcionariosMB.cantidadRegistros}</div>
+                                        </div> 
+                                    </div>
+
+                                    <div class="modal-header">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h:commandButton  id="guardarBD" 
+                                                                  value="Guardar en la BD" 
+                                                                  class="btn btn-primary" 
+                                                                  rendered="#{funcionariosMB.mostrarBotonSubirBd}"
+                                                                  action="#{funcionariosMB.guardarDesdeArchivoHorariosFuncionarios()}"
+                                                                  onclick="PF('pbAjax').start();"
+                                                                  disabled="#{funcionariosMB.activarBotonSubirBd}">
+                                                    <f:ajax render="guardarBD" />
+                                                </h:commandButton>
+                                            </div>
+                                            <div class="col-sm-8 text-primary">
+                                                <p:progressBar widgetVar="pbAjax" 
+                                                               ajax="true" 
+                                                               value="#{funcionariosMB.progress}" 
+                                                               labelTemplate="{value}%" 
+                                                               styleClass="animated"
+                                                               global="false"
+                                                               rendered="#{funcionariosMB.mostrarBotonSubirBd}">  
+                                                    <p:ajax event="complete" listener="#{funcionariosMB.onComplete}" update="@form" oncomplete="PF('pbAjax').stop();"/>
+                                                </p:progressBar> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </ui:define>
+</ui:composition>   

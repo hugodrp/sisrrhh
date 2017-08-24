@@ -1,0 +1,161 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">    
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h2>admin_funcionario_from_alta.xhtml - Alta de Funcionario</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <h:form role="form">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">
+
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="cedula">Cedula:</label>
+                                                        <span/>
+                                                        <h:inputText id="cedula"
+                                                                     class="col-sm-3"  
+                                                                     value="#{funcionariosMB.funcionario.numeroDocumento}"
+                                                                     required="true" 
+                                                                     requiredMessage="Cedula es obligatorio!"/>                                                                
+                                                    </div>
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="nombres">Nombres:</label>
+                                                        <span/>
+                                                        <h:inputText id="nombres"
+                                                                     class="col-sm-3"
+                                                                     label="Nombres"
+                                                                     value="#{funcionariosMB.funcionario.nombres}"
+                                                                     required="true" 
+                                                                     requiredMessage="Nombres es obligatorio!"/>                                                                 
+
+                                                        <label class="col-sm-3" for="apellidos">Apellidos:</label>
+                                                        <span/>
+                                                        <h:inputText class="col-sm-3"
+                                                                     id="apellidos" 
+                                                                     label="Apellidos"
+                                                                     value="#{funcionariosMB.funcionario.apellidos}"
+                                                                     required="true" 
+                                                                     requiredMessage="Apellidos es obligatorio!"/>                                                                 
+                                                    </div>
+
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="fechaIngreso">Fecha de ingreso:</label>
+                                                        <span/>
+                                                        <p:calendar id="fechaIngreso"
+                                                                    class="col-sm-3"
+                                                                    value="#{funcionariosMB.funcionario.fechaIngreso}"
+                                                                    pattern="dd/MM/yyyy"
+                                                                    mask="true"
+                                                                    locale="es"
+                                                                    required="true" 
+                                                                    requiredMessage="Fecha de ingreso es obligatorio!"/>
+                                                        <label class="col-sm-3" for="jornal">Jornal:</label>
+                                                        <span/>
+                                                        <h:inputText id="jornal"
+                                                                     class="col-sm-3"
+                                                                     value="#{funcionariosMB.funcionario.sueldoDiario}"  
+                                                                     required="true" 
+                                                                     requiredMessage="Jornal es obligatorio!">
+                                                            <f:convertNumber type="currency"
+                                                                             currencySymbol=""
+                                                                             minFractionDigits="0"/>
+                                                        </h:inputText>
+
+                                                    </div>
+
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="relacionLaboral">Relación Laboral:</label>
+                                                        <span/>
+                                                        <h:selectOneMenu id="relacionLaboral"
+                                                                         class="col-sm-3"
+                                                                         value="#{funcionariosMB.funcionario.relacionLaboral}"
+                                                                         required="true" 
+                                                                         requiredMessage="Relación Laboral es obligatorio!"
+                                                                         converter="#{relacionLaboralConverter}">
+                                                            <f:selectItem itemLabel=" Relacion Laboral" 
+                                                                          noSelectionOption="false"
+                                                                          itemDisabled="true"/>
+                                                            <f:selectItems value="#{funcionariosMB.relacionLaborales}" 
+                                                                           var="relacionLaboral"
+                                                                           itemValue="#{relacionLaboral}" 
+                                                                           itemLabel="#{relacionLaboral.descripcion}"/>
+                                                        </h:selectOneMenu>
+
+                                                        <label class="col-sm-3" for="horario">Horario Normal:</label>
+                                                        <span/>
+
+                                                        <h:selectOneMenu id="horario"
+                                                                         class="col-sm-3"
+                                                                         value="#{funcionariosMB.funcionario.horarioNormal}"
+                                                                         required="true" 
+                                                                         requiredMessage="Horario Normal es obligatorio!"
+                                                                         converter="#{horariosConverter}">
+                                                            <f:selectItem itemLabel=" Horario" 
+                                                                          noSelectionOption="false"
+                                                                          itemDisabled="true"/>
+                                                            <f:selectItems value="#{funcionariosMB.horarios}" 
+                                                                           var="horario"
+                                                                           itemValue="#{horario}" 
+                                                                           itemLabel="#{horario.descripcion}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+
+
+
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="estado">Estado:</label>
+                                                        <span/>
+                                                        <h:selectOneMenu id="estado"                                                                        
+                                                                         class="col-sm-3"
+                                                                         value="#{funcionariosMB.funcionario.estadoFuncionario}"
+                                                                         required="true" 
+                                                                         requiredMessage="Estado es obligatorio!"
+                                                                         converter="#{estadosConverter}">
+                                                            <f:selectItem itemLabel=" Estado" 
+                                                                          noSelectionOption="false"
+                                                                          itemDisabled="true"/>
+                                                            <f:selectItems value="#{funcionariosMB.estados}" 
+                                                                           var="estado"
+                                                                           itemValue="#{estado}" 
+                                                                           itemLabel="#{estado.descripcion}"/>
+                                                        </h:selectOneMenu>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-header">
+                                            <h:commandLink class="btn btn-default" 
+                                                           action="#{funcionariosMB.cancelarFomularios()}" immediate="true">
+                                                <i class="fa fa-ban"></i> Cancelar
+                                            </h:commandLink>
+                                            <span/>
+                                            <h:commandLink class="btn btn-success" 
+                                                           action="#{funcionariosMB.guardarFomularios('Insert')}" >
+                                                <i class="fa fa-save"></i> Guardar
+                                            </h:commandLink>
+                                        </div>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

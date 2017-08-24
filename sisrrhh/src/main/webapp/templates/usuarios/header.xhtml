@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <nav class="navbar-inverse navbar-cls-top" role="navigation">
+        <div class="navbar-header" style="float: none;">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SISRRHH</a> 
+            <div style="color: #FFFFFF;
+                 padding: 13px;
+                 float: left;
+                 font-size: 20px;"> 
+                <h:outputText value="Dirección de Recursos Humanos"/>
+            </div>
+            <div style="color: #FFFFFF;
+                 padding: 13px;
+                 float: right;
+                 font-size: 14px;"> 
+                <h:form>
+                    <h:outputText value="Sesión iniciada como: #{sisrrhhMB.funcionarioUsuario.usuario} "/>
+
+                    <h:commandLink action="#{sisrrhhMB.btnSalir()}" class="btn btn-default">
+                        <i class="fa fa-sign-out"></i> Cerrar sesión
+                    </h:commandLink>
+                </h:form>
+            </div>
+        </div>
+        <div class="navbar-collapse collapse">
+            <div class="sidebar-collapse">
+                <h:form>
+                    <ul class="nav navbar-side" >
+                        <li class="text-center">
+                            <h:graphicImage library="images" name="logo_menu_64.png"/>
+                        </li>
+                        <ui:fragment rendered="#{loginMB.menuLiquiHaberes}">
+                            <li>
+                                <a data-toggle="collapse" href="#collapse1"><i class="fa fa-list-alt fa-2x"></i> Liqui. Haberes<span class="fa arrow"></span></a>
+                                <div id="collapse1" class="collapse">
+                                    <ul class="nav nav-second-level">
+
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormFichaGeneralMensualNom()}">
+                                                <i class="fa fa-folder-o"></i> Ficha Nombrados
+                                            </h:commandLink>
+                                        </li>  
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormFichaGeneralMensualJor()}">
+                                                <i class="fa fa-folder-o"></i> Ficha Jornaleros
+                                            </h:commandLink>
+                                        </li>  
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment>    
+
+                        <ui:fragment rendered="#{loginMB.menuBeneficios}">
+                            <li>
+                                <a data-toggle="collapse" href="#collapse2"><i class="fa fa-list-alt fa-2x"></i> Beneficios<span class="fa arrow"></span></a>
+                                <div id="collapse2" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormFichaGeneralMensualNom()}">
+                                                <i class="fa fa-folder-o"></i> Ficha Nombrados
+                                            </h:commandLink>
+                                        </li>  
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormFichaGeneralMensualJor()}">
+                                                <i class="fa fa-folder-o"></i> Ficha Jornaleros
+                                            </h:commandLink>
+                                        </li>  
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{loginMB.menuLiquiHaberes}">
+                            <li>
+                                <a data-toggle="collapse" href="#collapse3"><i class="fa fa-list-alt fa-2x"></i> Reportes<span class="fa arrow"></span></a>
+                                <div id="collapse3" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormReporteRangoFecha()}">
+                                                <i class="fa fa-folder-o"></i> Reporte Marcacion por rango de fecha
+                                            </h:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment> 
+
+                    </ul>
+                </h:form>
+            </div>
+        </div>
+    </nav>
+</ui:composition>

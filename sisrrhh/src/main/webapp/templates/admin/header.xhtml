@@ -1,0 +1,298 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <nav class="navbar-inverse navbar-cls-top" role="navigation">
+        <div class="navbar-header" style="float: none;">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SISRRHH</a> 
+            <div style="color: #FFFFFF;
+                 padding: 13px;
+                 float: left;
+                 font-size: 20px;"> 
+                <h:outputText value="Dirección de Recursos Humanos"/>
+            </div>
+            <div style="color: #FFFFFF;
+                 padding: 13px;
+                 float: right;
+                 font-size: 14px;"> 
+                <h:form>
+                    <h:outputText value="Sesión iniciada como: #{sisrrhhMB.funcionarioUsuario.usuario} "/>
+
+                    <h:commandLink action="#{sisrrhhMB.btnSalir()}" class="btn btn-default">
+                        <i class="fa fa-sign-out"></i> Cerrar sesión
+                    </h:commandLink>
+                </h:form>
+            </div>
+        </div>
+        <div class="navbar-collapse collapse">
+            <div class="sidebar-collapse">
+                <h:form>
+                    <ul class="nav navbar-side" >
+                        <li class="text-center">
+                            <h:graphicImage library="images" name="logo_menu_64.png"/>
+                        </li>
+                        <ui:fragment>
+                            <li>
+                                <a data-toggle="collapse" href="#collapse1"><i class="fa fa-user fa-2x"></i> Mi cuenta<span class="fa arrow"></span></a>
+                                <div id="collapse1" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <ui:fragment rendered="false">
+                                            <li>
+                                                <h:commandLink action="admin_actualizar_datos">
+                                                    <i class="fa fa-refresh"></i> Actualizar datos
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_cambiar_contrasenia">
+                                                    <i class="fa fa-key"></i> Cambiar contraseña
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment>                        
+                        <ui:fragment >
+                            <li>
+                                <a data-toggle="collapse" href="#collapse2"><i class="fa fa-folder fa-2x"></i> Mantenimiento BD<span class="fa arrow"></span></a>
+                                <div id="collapse2" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{sisrrhhMB.prepararFormCargaDedeArchivoAsistencias()}">
+                                                    <i class="fa fa-edit"></i> Cargar asistencias
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>    
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{funcionariosMB.prepararFormCargaDedeArchivoFuncionarios()}">
+                                                    <i class="fa fa-edit"></i> Cargar funcionarios
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>  
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{horariosMB.prepararFormCargaDedeArchivoHorarios()}">
+                                                    <i class="fa fa-edit"></i> Cargar Horarios
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment> 
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{funcionariosMB.prepararFormCargaDedeArchivoHorariosFuncionarios()}">
+                                                    <i class="fa fa-edit"></i> Cargar Horarios Funcionarios
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment> 
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{fichasCalendariosMB.prepararFormCrearFichasCalendariosNom()}">
+                                                    <i class="fa fa-edit"></i> Generar Fichas Nom
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment> 
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{fichasCalendariosMB.prepararFormCrearFichasCalendariosJor()}">
+                                                    <i class="fa fa-edit"></i> Generar Fichas Jor
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment> 
+
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="#{fichasCalendariosMB.prepararUpdateBloqueo()}">
+                                                    <i class="fa fa-edit"></i> Update Bloque en NO
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>   
+                                    </ul>
+                                </div>
+                            </li>  
+                        </ui:fragment>
+                        <ui:fragment >
+                            <li>
+                                <a data-toggle="collapse" href="#collapse3"><i class="fa fa-list-alt fa-2x"></i> Reportes<span class="fa arrow"></span></a>
+                                <div id="collapse3" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormBuscarPorCedulaFechaDesdeFechaHasta()}">
+                                                <i class="fa fa-folder-o"></i> PDF por CI
+                                            </h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormBuscarPorRangoCedulaFechaDesdeFechaHasta()}">
+                                                <i class="fa fa-folder-o"></i> PDF por rango CI
+                                            </h:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormGenerarMultasNom()}">
+                                                <i class="fa fa-folder-o"></i> Generar Multas Nom CSV
+                                            </h:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormGenerarMultasJor()}">
+                                                <i class="fa fa-folder-o"></i> Generar Multas Jor CSV
+                                            </h:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormFichaGeneralMensualNom()}">
+                                                <i class="fa fa-folder-o"></i> Ficha general Nombrados
+                                            </h:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormFichaGeneralMensualJor()}">
+                                                <i class="fa fa-folder-o"></i> Ficha general Jornaleros
+                                            </h:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <h:commandLink action="#{fichasCalendariosMB.prepararFormReporteRangoFecha()}">
+                                                <i class="fa fa-folder-o"></i> Reporte Marcacion por rango de fecha
+                                            </h:commandLink>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment>    
+                        <ui:fragment >
+                            <li>
+                                <a data-toggle="collapse" href="#collapse4"><i class="fa fa-folder fa-2x"></i> Vacaciones<span class="fa arrow"></span></a>
+                                <div id="collapse4" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormulariosVacaciones('form_pedido')}">
+                                                <i class="fa fa-check"></i> Pedidos Vacaciones
+                                            </h:commandLink>
+                                        </li>   
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormulariosVacaciones('form_modificacion')}">
+                                                <i class="fa fa-check"></i> Eliminar Vacación
+                                            </h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormulariosVacaciones('form_anual')}">
+                                                <i class="fa fa-check"></i> Carga Anual
+                                            </h:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment>
+                        <ui:fragment >
+                            <li>
+                                <a data-toggle="collapse" href="#collapse5"><i class="fa fa-users fa-2x"></i> Admin. Funcionarios<span class="fa arrow"></span></a>
+                                <div id="collapse5" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                         <li>
+                                             <h:commandLink action="#{funcionariosMB.prepararMostrarListaFuncionarios()}">
+                                                <i class="fa fa-check"></i> Funcionarios
+                                            </h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormVacaciones()}">
+                                                <i class="fa fa-check"></i> Vacaciones
+                                            </h:commandLink>
+                                        </li>
+
+                                        <li>
+                                            <h:commandLink action="#{sisrrhhMB.prepararFormVacaciones()}">
+                                                <i class="fa fa-check"></i> Permisos
+                                            </h:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ui:fragment>
+                        <ui:fragment >
+                            <li>
+                                <a data-toggle="collapse" href="#collapse7"><i class="fa fa-desktop fa-2x"></i> Panel de control<span class="fa arrow"></span></a>
+                                <div id="collapse7" class="collapse">
+                                    <ul class="nav nav-second-level">
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_personas">
+                                                    <i class="fa fa-users"></i> Personas
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_usuarios">
+                                                    <i class="fa fa-users"></i> Usuarios
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_usuarios_sistema">
+                                                    <i class="fa fa-users"></i> Usuarios del Sistema
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_dependencias">
+                                                    <i class="fa fa-university"></i> Dependencias
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_tipos_reclamos">
+                                                    <i class="fa fa-folder-o"></i> Tipos de reclamos
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_estados_reclamos">
+                                                    <i class="fa fa-folder-o"></i> Estado de reclamos
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_elementos_web">
+                                                    <i class="fa fa-folder-o"></i> Elementos web
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment >
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_roles">
+                                                    <i class="fa fa-folder-o"></i> Roles
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                        <ui:fragment>
+                                            <li>
+                                                <h:commandLink action="admin_matenimiento_reclamos">
+                                                    <i class="fa fa-folder-o"></i> Reclamos
+                                                </h:commandLink>
+                                            </li>
+                                        </ui:fragment>
+                                    </ul>
+                                </div>
+                            </li> 
+                        </ui:fragment>
+                    </ul>
+                </h:form>
+            </div>
+        </div>
+    </nav>
+</ui:composition>

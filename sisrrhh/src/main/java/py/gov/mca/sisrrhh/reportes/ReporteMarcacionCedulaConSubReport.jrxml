@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReclamoRangoFechaEstadoReclamosPorDependencia" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="50" rightMargin="30" topMargin="30" bottomMargin="30" uuid="50a526a4-d643-4978-aced-b8ede2cb8357">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1">
+		<pen lineStyle="Double" lineColor="#040202"/>
+		<box>
+			<pen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+			<topPen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+			<leftPen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+			<bottomPen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+			<rightPen lineWidth="2.0" lineStyle="Double" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#999999"/>
+			<bottomPen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#999999"/>
+			<bottomPen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#999999"/>
+			<bottomPen lineWidth="0.5" lineColor="#999999"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="urlImagen" class="java.lang.String"/>
+	<parameter name="urlImagen2" class="java.lang.String"/>
+	<parameter name="nombreDependencia" class="java.lang.String"/>
+	<parameter name="mes" class="java.util.Date"/>
+	<parameter name="anio" class="java.util.Date"/>
+	<parameter name="fechaGeneracion" class="java.util.Date"/>
+	<parameter name="totalRegistros" class="java.lang.Integer"/>
+	<parameter name="usuarioGeneracion" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/vinsfran/NetBeansProjects/reclamosmca/src/java/py/gov/mca/reclamosmca/reportes/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cedulaFuncionario" class="java.lang.String"/>
+	<parameter name="apellidoNombreFuncionario" class="java.lang.String"/>
+	<parameter name="nombreApellidoFuncionario" class="java.lang.String"/>
+	<field name="nroDoc" class="java.lang.String"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="nombresApellidos" class="java.lang.String"/>
+	<field name="apellidosNombres" class="java.lang.String"/>
+	<field name="tipoFuncionario" class="java.lang.String"/>
+	<field name="fechaDesde" class="java.util.Date"/>
+	<field name="fechaHasta" class="java.util.Date"/>
+	<field name="listaMarcacion" class="java.util.List"/>
+	<variable name="vTituloDependencia" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="141">
+			<rectangle>
+				<reportElement x="0" y="83" width="515" height="11" backcolor="#6699FF" uuid="0069984a-0c22-41b3-9e43-e456fe55859d"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<subreport isUsingCache="false">
+				<reportElement style="style1" x="-1" y="94" width="515" height="43" uuid="4d902278-99f8-4634-b03c-c0e15c2e8984"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaMarcacion})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubReporteMarcacionCedulaConSubReport.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="138" width="100" height="1" isRemoveLineWhenBlank="true" uuid="c716c906-7e3f-43d9-a50c-b41285e5c56d"/>
+			</break>
+			<textField>
+				<reportElement x="81" y="53" width="137" height="15" uuid="45fa1fb7-b94d-48ba-aebb-168a27fd8bc4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nroDoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="68" width="433" height="15" uuid="116f56a3-bdbc-4f5e-bb58-4e1ddf0cda20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidosNombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="53" width="81" height="15" uuid="f4fc78ad-7738-478f-9b47-efc7f3664b66"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="81" height="15" uuid="95f33417-0459-478b-be41-17ae47dab101"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Funcionario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="83" width="63" height="11" forecolor="#FFFFFF" uuid="7adbb0dc-c16d-4784-934d-9854eecbd034"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="83" width="89" height="11" forecolor="#FFFFFF" uuid="23fe82f6-9f52-4ebc-b623-4134a2767263"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="83" width="89" height="11" forecolor="#FFFFFF" uuid="9a5b98c1-19f6-4e61-9450-4fdc45b4db3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="83" width="89" height="11" forecolor="#FFFFFF" uuid="420bac2d-d776-4739-9e86-f20db0eff09a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrada o Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="83" width="100" height="11" forecolor="#FFFFFF" uuid="52275bed-b318-461b-becd-d14ad7ed4279"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porcentaje Multa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="83" width="63" height="11" forecolor="#FFFFFF" uuid="c9cb3033-dded-4433-a9cb-2b07e808a2bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="37" width="515" height="15" forecolor="#FFFFFF" backcolor="#6699FF" uuid="d411b4f8-9cba-46c9-997d-c572201ca45c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Reporte de marcacion por rango de fecha]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="24" width="515" height="12" uuid="586932da-3fbd-4c41-953d-f6578b8d162f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreDependencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="515" height="16" uuid="93992970-279a-4480-be27-842fb8b10aa1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[MUNICIPALIDAD DE ASUNCION]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="36" height="36" uuid="1b28c69e-61f5-4411-8706-bf05d8c1769b"/>
+				<imageExpression><![CDATA[$P{urlImagen}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="479" y="0" width="36" height="36" uuid="64b0c36d-628b-4969-bfd8-b8fcb07fd84b"/>
+				<imageExpression><![CDATA[$P{urlImagen2}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="491" y="0" width="23" height="15" uuid="888dd3f4-92aa-4371-a67b-75f4b6fe2f10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="27" height="15" uuid="e7c77128-94cc-4b86-988d-79a65ae0788b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="27" y="0" width="65" height="15" uuid="65d61a1b-5671-459b-aef7-42125804ecd6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaGeneracion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

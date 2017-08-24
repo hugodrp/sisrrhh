@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">    
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h2>admin_funcionario_vacaciones_form_anual.xhtml - Carga de Vacaciones Anual</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <h:form role="form">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">                                                    
+                                                    <div class="row col-md-12">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="cedula2">Cedula</label>
+                                                                <h:inputText id="cedula2"
+                                                                             class="form-control" 
+                                                                             value="#{sisrrhhMB.cedulaFuncionarioVacaciones}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 center-block">
+                                                            <div class="form-group">
+                                                                <label for="buscar2" style="margin-bottom: 1; color: white">*</label>
+                                                                <h:commandLink id="buscar2" class="btn btn-info form-control center-block" 
+                                                                               action="#{sisrrhhMB.buscarFuncionarioVacacionesAnual()}">
+                                                                    <i class="fa fa-search"></i> Buscar
+                                                                </h:commandLink>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br/>
+                                                    <ui:fragment rendered="#{sisrrhhMB.mostrarComponentesVacaciones}">
+                                                        <div class="row form-group col-sm-12">
+                                                            <div class="col-sm-6">
+                                                                <label for="funcionario2">Funcionario:</label>
+                                                                <span/>
+                                                                <h:outputText id="funcionario2" 
+                                                                              value="#{sisrrhhMB.funcionarioVacaciones.apellidos}, #{sisrrhhMB.funcionarioVacaciones.nombres}"/>                                                                
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="relacionLaboral2">Relación Laboral:</label>
+                                                                <span/>
+                                                                <h:outputText id="relacionLaboral2" value="#{sisrrhhMB.funcionarioVacaciones.relacionLaboral.descripcion}"/>                                                              
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group col-sm-12">
+                                                            <div class="col-sm-6">
+                                                                <label for="horario2">Horario:</label>
+                                                                <span/>
+                                                                <h:outputText id="horario2" value="#{sisrrhhMB.funcionarioVacaciones.horarioNormal.descripcion}"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row form-group col-md-12">
+
+                                                            <div class="col-sm-3">
+                                                                <label for="anio">Periodo</label>
+                                                                <span/>
+                                                                <h:inputText id="anio"
+                                                                             class="form-control" 
+                                                                             value="#{sisrrhhMB.anioVacacion}"/>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label for="diasCorrespondientes">Dias correspondientes</label>
+                                                                <span/>
+                                                                <h:inputText id="diasCorrespondientes"
+                                                                             class="form-control" 
+                                                                             value="#{sisrrhhMB.diasCorrespondientesVacacion}"/>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label for="diasRestantes">Dias restante</label>
+                                                                <span/>
+                                                                <h:inputText id="diasRestantes"
+                                                                             class="form-control" 
+                                                                             value="#{sisrrhhMB.diasRestantesVacacion}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="table-responsive">
+
+                                                                    <h:dataTable value="#{sisrrhhMB.vacacionesFuncionarios}" 
+                                                                                 var="fila"
+                                                                                 class="table table-striped table-hover table-condensed"
+                                                                                 id="dataTables-example2">
+
+                                                                        <h:column>
+                                                                            <f:facet name="header" class="success">Periodo</f:facet>
+                                                                            <h:outputText value="#{fila.vacacionesFuncionariosPK.anioVacacion}" />
+                                                                        </h:column>
+                                                                        <h:column>
+                                                                            <f:facet name="header" class="success">Dias correspondientes</f:facet>
+                                                                            <h:outputText value="#{fila.cantidadDiasCorrespondiente}" />
+                                                                        </h:column>
+                                                                        <h:column >
+                                                                            <f:facet name="header">Dias restante</f:facet>
+                                                                            <h:outputText value="#{fila.cantidadDiasRestante}"/> 
+                                                                        </h:column> 
+
+                                                                    </h:dataTable>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ui:fragment>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-header">
+                                            <h:commandLink class="btn btn-default" action="#{mbSRoles.btnCancelar()}" immediate="true" rendered="#{sisrrhhMB.mostrarComponentesVacaciones}">
+                                                <i class="fa fa-ban"></i> Cancelar
+                                            </h:commandLink>
+                                            <span/>
+                                            <h:commandLink class="btn btn-success" 
+                                                           action="#{sisrrhhMB.guardarVacacionAnio()}" rendered="#{sisrrhhMB.mostrarComponentesVacaciones}">
+                                                <i class="fa fa-save"></i> Guardar
+                                            </h:commandLink>
+                                        </div>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

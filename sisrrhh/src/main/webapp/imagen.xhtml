@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="shortcut icon" href="../resources/images/favicon.ico" />
+            <title>Reclamos Online</title>
+        </f:facet>
+        <f:facet name="middle">
+            <!-- BOOTSTRAP STYLES-->
+            <h:outputStylesheet name="assets/css/bootstrap.css" />
+            <!--            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />-->
+            <!-- MORRIS CHART STYLES-->
+            <!--            <h:outputStylesheet name="assets/js/morris/morris-0.4.3.min.css" />-->
+            <!-- CUSTOM STYLES-->
+            <h:outputStylesheet name="assets/css/custom.css" />
+            <h:outputStylesheet name="css/botoncargar.css" />
+            <!-- TABLE STYLES-->
+            <!--            <h:outputStylesheet name="assets/js/dataTables/dataTables.bootstrap.css" />-->
+
+
+        </f:facet>
+        <f:facet name="last">
+            <!-- FONTAWESOME STYLES-->
+            <h:outputStylesheet name="css/font-awesome.css" />
+
+            <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+            <!-- JQUERY SCRIPTS -->
+
+            <!--            <h:outputScript name="assets/js/jquery-1.10.2.js" />-->
+            <!-- BOOTSTRAP SCRIPTS -->
+            <h:outputScript name="assets/js/bootstrap.js" /> 
+            <!--            <h:outputScript name="bootstrap/js/bootstrap.js" />-->
+            <!-- DATA TABLE SCRIPTS -->
+            <h:outputScript name="assets/js/dataTables/jquery.dataTables.js" /> 
+            <h:outputScript name="assets/js/dataTables/dataTables.bootstrap.js" /> 
+            <script>
+                $(document).ready(function () {
+                    $('#dataTables-example').dataTable();
+                });
+            </script>
+
+            <!-- METISMENU SCRIPTS -->
+            <!--            <h:outputScript name="assets/js/jquery.metisMenu.js" />  -->
+            <!-- MORRIS CHART SCRIPTS -->
+            <!--            <h:outputScript name="assets/js/morris/raphael-2.1.0.min.js" />  
+                        <h:outputScript name="assets/js/morris/morris.js" />  -->
+            <!-- CUSTOM SCRIPTS -->
+            <!--            <h:outputScript name="assets/js/custom.js" /> -->
+
+        </f:facet>
+    </h:head>
+    <h:body style="background: #202020 none repeat scroll 0%">
+        <div align="center">
+            <h:panelGrid columns="1" rendered="#{mbSReclamos.reclamoSeleccionado.fkImagen != null? true : false}">
+                <h1>Imagen del reclamo</h1>
+                <p:graphicImage id="imagen1" 
+                                class="img-responsive"
+                                value="#{mbSReclamos.imagenCargada}" cache="false"/>
+            </h:panelGrid>
+            <h:panelGrid columns="1" rendered="#{mbSReclamos.reclamoSeleccionado.fkImagen != null? false : true}">
+                <h1>Reclamo sin imagen</h1>
+                <p:graphicImage id="imagen2" 
+                                class="img-responsive"
+                                library="images"
+                                width="400"
+                                height="400"
+                                name="imagen_no_encontrada.jpg" cache="false"/>
+            </h:panelGrid>
+
+        </div>
+
+    </h:body>
+</html>

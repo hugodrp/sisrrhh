@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">    
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h2>admin_funcionario_from_modificar_horario_normal.xhtml - Modificación de Horario Normal</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <h:form role="form">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">
+
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="cedula">Cedula:</label>
+                                                        <span/>
+                                                        <h:outputText id="cedula"
+                                                                      class="col-sm-3"  
+                                                                      value="#{funcionariosMB.funcionario.numeroDocumento}"/>                                                                
+                                                    </div>
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="nombres">Nombres:</label>
+                                                        <span/>
+                                                        <h:outputText id="nombres"
+                                                                      class="col-sm-3"
+                                                                      value="#{funcionariosMB.funcionario.nombres}"/>                                                                 
+
+                                                        <label class="col-sm-3" for="apellidos">Apellidos:</label>
+                                                        <span/>
+                                                        <h:outputText class="col-sm-3"
+                                                                      id="apellidos" 
+                                                                      value="#{funcionariosMB.funcionario.apellidos}"/>                                                                 
+                                                    </div>
+
+                                                    <div class="row form-group col-sm-12">
+                                                        <label class="col-sm-2" for="horarioActual">Horario Actual:</label>
+                                                        <span/>
+                                                        <h:outputText class="col-sm-3"
+                                                                      id="horarioActual" 
+                                                                      value="#{funcionariosMB.funcionario.horarioNormal.descripcion}"/> 
+
+                                                        <label class="col-sm-3" for="horario">Horario Normal:</label>
+                                                        <span/>
+                                                        <h:selectOneMenu id="horario"
+                                                                         class="col-sm-3"
+                                                                         value="#{funcionariosMB.horario.horario}"
+                                                                         required="true" 
+                                                                         requiredMessage="Horario Normal es obligatorio!">
+                                                            <f:selectItem itemLabel=" Horario" 
+                                                                          noSelectionOption="false"
+                                                                          itemDisabled="false"/>
+                                                            <f:selectItems value="#{funcionariosMB.horarios}" 
+                                                                           var="horario"
+                                                                           itemValue="#{horario.horario}" 
+                                                                           itemLabel="#{horario.descripcion}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-header">
+                                            <h:commandLink class="btn btn-default" 
+                                                           action="#{funcionariosMB.cancelarFomularios()}" immediate="true">
+                                                <i class="fa fa-ban"></i> Cancelar
+                                            </h:commandLink>
+                                            <span/>
+                                            <h:commandLink class="btn btn-success" 
+                                                           action="#{funcionariosMB.guardarFomularioHorarioNormal('Update')}" >
+                                                <i class="fa fa-save"></i> Guardar
+                                            </h:commandLink>
+                                        </div>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

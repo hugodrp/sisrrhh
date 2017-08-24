@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReporteMarcacionCedulaConSubReport" pageWidth="515" pageHeight="802" columnWidth="515" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="196fe852-573e-4b9c-a1df-0acf10deaacf">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="fichaCalendarioPK.fechaCalendario" class="java.util.Date"/>
+	<field name="diaCalendarioLetra" class="java.lang.String"/>
+	<field name="horaEntrada" class="java.util.Date"/>
+	<field name="horaSalida" class="java.util.Date"/>
+	<field name="horaNoDefinida" class="java.util.Date"/>
+	<field name="porcentajeMulta" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="515" height="11" backcolor="#CCFFFF" uuid="8babcb01-baa0-4c29-9ddd-684c8244c866">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="63" height="11" uuid="90f2b461-3459-4a49-9236-3ed6d7d0522e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fichaCalendarioPK.fechaCalendario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="393" y="0" width="100" height="11" uuid="d465fdf8-2690-40dc-a52d-d19503ff52e2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{porcentajeMulta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm" isBlankWhenNull="true">
+				<reportElement x="126" y="0" width="89" height="11" uuid="3ab516b7-4947-43fc-b5ed-6aefde5c3fd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horaEntrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="63" height="11" uuid="c28cedef-545e-4cf7-b038-c5f4fc92f900"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diaCalendarioLetra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm" isBlankWhenNull="true">
+				<reportElement x="215" y="0" width="89" height="11" uuid="04a571b9-e05d-4334-8871-8cdf8bbbda37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horaSalida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm" isBlankWhenNull="true">
+				<reportElement x="304" y="0" width="89" height="11" uuid="26ff7dd4-3067-4f91-a732-e20b27deb9ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horaNoDefinida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

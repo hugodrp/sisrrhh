@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">  
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>admin_form_update_bloqueo.xhtml</h2>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h:form id="form">
+
+                            <div class="panel panel-body">                           
+                                <div class="panel panel-info">
+                                    
+                                    
+
+                                    <div class="modal-header">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h:commandButton  id="guardarBD" 
+                                                                  value="Actualizar" 
+                                                                  class="btn btn-primary" 
+                                                                  action="#{fichasCalendariosMB.updateBloqueo()}">
+                                                </h:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </ui:define>
+</ui:composition>   

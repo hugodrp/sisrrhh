@@ -1,0 +1,195 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" 
+                template="/templates/admin/main.xhtml">
+
+    <ui:define name="content">
+        <style type="text/css">
+            .table_with_filter.ui-datatable-data {
+                border-top: 25px solid #DDDDDD; 
+            }
+            .table_with_filter.ui-column-filter.ui-inputfield {
+                position: relative;
+                bottom: -26px;
+            }
+            .table_with_filter th.ui-state-default {
+                overflow: visible; 
+            }
+
+
+
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+            .year-spinner input {
+                width: 100px
+            }
+
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                display: none;
+            }
+        </style>
+
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>admin_funcionario_lista.xhtml - Lista de funcionarios</h2>
+                        <h:form class="modal-footer">
+                            <h:commandLink style="margin-left: 2px; margin-right: 2px;" 
+                                           class="btn btn-primary"
+                                           action="#{funcionariosMB.nuevoFuncionario()}">
+                                <i class="fa fa-edit"></i> Nuevo Funcionario
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+
+                        <h:form id="fromFuncionarios">                            
+                            <p:dataTable id="tbl"
+                                         value="#{funcionariosMB.listaFuncionarios}" 
+                                         var="funcionario"
+                                         emptyMessage="Sin registros"
+                                         rows="50"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                         currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
+                                         rowsPerPageTemplate="10,20,30,40,50,60,80,90,100"
+                                         selection="#{funcionariosMB.slcFuncionario}"
+                                         selectionMode="single"
+                                         rowKey="#{funcionario.numeroDocumento}"
+                                         filteredValue="#{funcionariosMB.listaFuncionariosFiltro}"
+                                         widgetVar="tbl"
+                                         style="margin-bottom:20px">
+
+                                <f:facet name="{Exporters}">
+                                    <h:commandLink style="float: right; padding-right: 10px">
+                                        <p:graphicImage name="images/xml.png" width="24"/>
+                                        <p:dataExporter type="xml" target="tbl" fileName="Funcionarios" />
+                                    </h:commandLink>
+
+                                    <h:commandLink style="float: right">
+                                        <p:graphicImage name="images/csv.png" width="24"/>
+                                        <p:dataExporter type="csv" target="tbl" fileName="Funcionarios" />
+                                    </h:commandLink>
+
+                                    <h:commandLink style="float: right">
+                                        <p:graphicImage name="images/excel.png" width="24"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="Funcionarios" />
+                                    </h:commandLink>
+
+                                    <h:commandLink style="float: right">
+                                        <p:graphicImage name="images/pdf.png" width="24"/>
+                                        <p:dataExporter type="pdf" target="tbl" fileName="Funcionarios"/>
+                                    </h:commandLink>
+                                </f:facet>
+
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Buscar " />
+                                        <p:inputText id="globalFilter" 
+                                                     onkeyup="PF('tbl').filter()" 
+                                                     style="width:150px" 
+                                                     placeholder="Ingrese un texto"/>
+                                    </p:outputPanel>
+                                </f:facet>
+
+                                <p:column headerText="Nro. documento" 
+                                          filterBy="#{funcionario.numeroDocumento}" 
+                                          filterMatchMode="contains"
+                                          filterPosition="top">                                                
+                                    <h:outputText value="#{funcionario.numeroDocumento}" />
+                                </p:column>
+
+                                <p:column  headerText="Apellidos, Nombres" 
+                                           filterBy="#{funcionario.apellidos} #{funcionario.nombres}" 
+                                           filterMatchMode="contains"
+                                           filterPosition="top">
+                                    <h:outputText value="#{funcionario.apellidos}, #{funcionario.nombres}"/>
+                                </p:column>
+
+
+                                <p:column headerText="Relación Laboral" 
+                                          filterBy="#{funcionario.relacionLaboral.descripcion}" 
+                                          filterMatchMode="contains"
+                                          filterPosition="top">
+                                    <h:outputText value="#{funcionario.relacionLaboral.descripcion}"
+                                                  style="#{funcionario.relacionLaboral.relacionLaboral == 'NODEF' ? 'color: red; font-weight: bold;' : ''}"/>
+                                </p:column>
+
+                                <p:column headerText="Horario" 
+                                          filterBy="#{funcionario.horarioNormal.descripcion}" 
+                                          filterMatchMode="contains"
+                                          filterPosition="top">
+                                    <h:outputText value="#{funcionario.horarioNormal.descripcion}" 
+                                                  style="#{funcionario.horarioNormal.horario == '00000000' ? 'color: red; font-weight: bold;' : ''}"/>
+                                </p:column>
+
+                                <p:column headerText="Jornal" 
+                                          filterBy="#{funcionario.sueldoDiario}" 
+                                          filterMatchMode="contains"
+                                          filterPosition="top">
+                                    <h:outputText value="#{funcionario.sueldoDiario > 0 ? funcionario.sueldoDiario : 'Sin Jornal'}"
+                                                  style="#{funcionario.sueldoDiario > 0 ? '' : 'color: red; font-weight: bold;'}">
+                                        <f:convertNumber type="currency"
+                                                         currencySymbol=""
+                                                         minFractionDigits="0"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="Fecha de ingreso" 
+                                          filterBy="#{funcionario.fechaIngreso}" 
+                                          filterMatchMode="contains"
+                                          filterPosition="top">
+                                    <h:outputText value="#{funcionario.fechaIngreso != null ? funcionariosMB.formatearFecha(funcionario.fechaIngreso) : 'NO DEFINIDO'}"
+                                                  style="#{funcionario.fechaIngreso != null ? '' : 'color: red; font-weight: bold;'}"/>
+                                </p:column>
+
+                                <p:column headerText="Estado" 
+                                          filterBy="#{funcionario.estadoFuncionario.descripcion}" 
+                                          filterMatchMode="contains"
+                                          filterPosition="top">
+                                    <h:outputText value="#{funcionario.estadoFuncionario.descripcion}"
+                                                  style="#{funcionario.estadoFuncionario.codigo == 'ACT' ? '' : 'color: red; font-weight: bold;'}"/>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:contextMenu for="tbl">
+                                <p:menuitem value=" Apellido o Nombre"
+                                            icon="ui-icon-refresh"
+                                            action="#{funcionariosMB.modificarFuncionario('nombreApellido')}"/>
+                                <p:menuitem value=" Relación Laboral"
+                                            icon="ui-icon-refresh"
+                                            action="#{funcionariosMB.modificarFuncionario('relacionLaboral')}"/>
+                                <p:menuitem value=" Horario"
+                                            icon="ui-icon-refresh"
+                                            action="#{funcionariosMB.modificarFuncionario('horario')}"/>
+                                <p:menuitem value=" Jornal"
+                                            icon="ui-icon-refresh"
+                                            action="#{funcionariosMB.modificarFuncionario('jornal')}"/>
+                                <p:menuitem value=" Fecha de Ingreso"
+                                            icon="ui-icon-refresh"
+                                            action="#{funcionariosMB.modificarFuncionario('fechaIngreso')}"/>
+                                <p:menuitem value=" Estado"
+                                            icon="ui-icon-refresh"
+                                            action="#{funcionariosMB.modificarFuncionario('estado')}"/>
+                            </p:contextMenu>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

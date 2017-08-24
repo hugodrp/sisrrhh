@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">    
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <h:form class="form-inline" role="form"> 
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h2>admin_form_porcentaje.xhtml</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <h4><label>Ingrese porcentaje.</label></h4>
+                                                        </div>
+                                                        <span/>
+                                                    </div>
+                                                    <div class="row col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="nombre">Porcentaje:</label>
+                                                            <h:inputText id="nombre"
+                                                                         class="form-control" 
+                                                                         value="#{sisrrhhMB.porcentajeMulta}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-header">
+                                        <h:commandLink class="btn btn-default" action="#{mbSRoles.btnCancelar()}" immediate="true">
+                                            Cancelar
+                                        </h:commandLink>
+                                        <span/>
+                                        <h:commandLink class="btn btn-primary" 
+                                                       action="#{sisrrhhMB.guardarPorcentajeEnFila()}" >
+                                            <i class="fa fa-save"></i> Guardar
+                                        </h:commandLink>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

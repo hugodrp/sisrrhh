@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <h:form role="form">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h2>admin_form_generar_multas_jor_csv.xhtml - Generar Multas para Jornaleros</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="anio">Año:</label>
+                                                                <p:inputText id="anio" 
+                                                                             value="#{fichasCalendariosMB.numeroAnio}"
+                                                                             class="form-control"
+                                                                             size="10"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="mes">Periodo:</label>
+                                                                <h:selectOneMenu id="mes" value="#{fichasCalendariosMB.numeroCiclo}" 
+                                                                                 class="form-control">
+                                                                    <f:selectItem itemLabel="Seleccione periodo" 
+                                                                                  noSelectionOption="false"
+                                                                                  itemDisabled="true"/>
+                                                                    <f:selectItems value="#{fichasCalendariosMB.listaCiclos.entrySet()}" 
+                                                                                   var="mes"
+                                                                                   itemValue="#{mes.key}"
+                                                                                   itemLabel="#{mes.value}"/>
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 center-block">
+                                                            <div class="form-group">
+                                                                <label for="buscar" style="margin-bottom: 1; color: white">*</label>
+                                                                <h:commandLink id="buscar" class="btn btn-info form-control center-block" 
+                                                                               action="#{fichasCalendariosMB.generarMultasTotalesPorRangoDeFechaEnCsv('JOR')}">
+                                                                    <i class="fa fa-search"></i> Generar Multas
+                                                                </h:commandLink>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

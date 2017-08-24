@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/usuarios/main.xhtml">
+    <ui:define name="content">
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <h:form role="form">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h2>Ficha general para calculo de Multas para Nombrados</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="anio">Año:</label>
+                                                                <p:inputText id="anio" 
+                                                                             value="#{fichasCalendariosMB.numeroAnio}"
+                                                                             class="form-control"
+                                                                             size="10"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="mes">Mes:</label>
+                                                                <h:selectOneMenu id="mes" value="#{fichasCalendariosMB.numeroMes}" 
+                                                                                 class="form-control">
+                                                                    <f:selectItem itemLabel="Seleccione mes" 
+                                                                                  noSelectionOption="false"
+                                                                                  itemDisabled="true"/>
+                                                                    <f:selectItems value="#{fichasCalendariosMB.listaMeses.entrySet()}" 
+                                                                                   var="mes"
+                                                                                   itemValue="#{mes.key}"
+                                                                                   itemLabel="#{mes.value}"/>
+                                                                </h:selectOneMenu>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="cedula">Cedula:</label>
+                                                                <p:inputText id="cedula" value="#{fichasCalendariosMB.cedulaFuncionario}"
+                                                                             class="form-control"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 center-block">
+                                                            <div class="form-group">
+                                                                <label for="buscar" style="margin-bottom: 1; color: white">*</label>
+                                                                <h:commandLink id="buscar" class="btn btn-info form-control center-block" 
+                                                                               action="#{fichasCalendariosMB.buscarFichaPorMesAnioCedulaNom()}">
+                                                                    <i class="fa fa-search"></i> Buscar
+                                                                </h:commandLink>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                                <ui:fragment rendered="#{fichasCalendariosMB.mostrarComponentesPantallaBuscarRangoFechaCedula}">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <div class="row form-group col-sm-12">
+                                                                <div class="col-sm-6">
+                                                                    <label for="funcionario">Funcionario:</label>
+                                                                    <span/>
+                                                                    <h:outputText id="funcionario" 
+                                                                                  value="#{fichasCalendariosMB.funcionario.apellidos}, #{fichasCalendariosMB.funcionario.nombres}"/>                                                                
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label for="relacionLaboral">Relación Laboral:</label>
+                                                                    <span/>
+                                                                    <h:outputText id="relacionLaboral" value="#{fichasCalendariosMB.funcionario.relacionLaboral.descripcion}"/>                                                              
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group col-sm-12">
+                                                                <div class="col-sm-6">
+                                                                    <label for="fichaVerificada">Ficha Verificada:</label>
+                                                                    <span/>
+                                                                    <h:outputText id="fichaVerificada" 
+                                                                                  value="#{fichasCalendariosMB.fichaVerificada}"/>                                                                
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="table-responsive">
+                                                                        <h:dataTable value="#{fichasCalendariosMB.fichasCalendarios}" 
+                                                                                     var="fila"
+                                                                                     class="table table-striped table-hover table-condensed table-responsive table-bordered"
+                                                                                     binding="#{fichasCalendariosMB.dataTableFichasCalendarios}">
+                                                                            <h:column class="col-sm-3">
+                                                                                <f:facet name="header">Fechas</f:facet>
+                                                                                <h:panelGrid columns="1" 
+                                                                                             class="table-condensed">
+                                                                                    <h:outputText value="#{fila.diaCalendarioLetra}"/>
+                                                                                    <h:outputText value="#{fichasCalendariosMB.formatearFecha(fila.fichaCalendarioPK.fechaCalendario)}"/>
+                                                                                </h:panelGrid>
+                                                                            </h:column>
+                                                                            <h:column class="col-sm-3">
+                                                                                <f:facet name="header">Marcaciones</f:facet>
+                                                                                <h:panelGrid columns="2" 
+                                                                                             class="table-condensed"
+                                                                                             rendered="#{fila.horaEntrada != null or fila.horaSalida != null or fila.horaNoDefinida != null ? true:false}">
+                                                                                    <h:outputText value="Entrada: " 
+                                                                                                  rendered="#{fila.horaEntrada != null ? true:false}"/>
+                                                                                    <h:outputText value="#{fichasCalendariosMB.formatearFechaToHora(fila.horaEntrada)}"
+                                                                                                  rendered="#{fila.horaEntrada != null ? true:false}"/>
+                                                                                    <h:outputText value="Salida: " 
+                                                                                                  rendered="#{fila.horaSalida != null ? true:false}"/>
+                                                                                    <h:outputText value="#{fichasCalendariosMB.formatearFechaToHora(fila.horaSalida)}"
+                                                                                                  rendered="#{fila.horaSalida != null ? true:false}"/>
+                                                                                    <h:outputText value="No definido: " 
+                                                                                                  rendered="#{fila.horaNoDefinida != null ? true:false}"/>
+                                                                                    <h:commandLink rendered="#{(fila.horaNoDefinida != null and !fichasCalendariosMB.activarComponentes) ? true:false}"
+                                                                                                   style="margin-right: 2px;" 
+                                                                                                   class="btn btn-warning btn-sm" 
+                                                                                                   action="#{fichasCalendariosMB.moverHorarioMarcacionFichaGeneral()}">
+                                                                                        <h:outputText value="#{fichasCalendariosMB.formatearFechaToHora(fila.horaNoDefinida)}"/> 
+                                                                                    </h:commandLink>
+                                                                                    <h:outputText rendered="#{fichasCalendariosMB.activarComponentes}"
+                                                                                                  value="#{fichasCalendariosMB.formatearFechaToHora(fila.horaNoDefinida)}"
+                                                                                                  style="#{fila.horaNoDefinida != null ? 'color: red; font-weight: bold;' : 'color: green;'}"/>
+                                                                                </h:panelGrid>
+                                                                            </h:column>
+                                                                            <h:column class="col-sm-3">
+                                                                                <f:facet name="header">                                                                                    
+                                                                                    <h:panelGrid columns="2" 
+                                                                                                 class="table-condensed">
+                                                                                        <h:outputText value="Horario Normal: "/>
+                                                                                        <h:outputText id="horario" value="#{fichasCalendariosMB.funcionario.horarioNormal.descripcion}"
+                                                                                                      style="color: green;"/>
+                                                                                        <h:outputText value="Horarios asignados y Excepciones"/>
+                                                                                    </h:panelGrid>
+                                                                                </f:facet>
+                                                                                <h:panelGrid columns="2" 
+                                                                                             class="table-condensed">
+                                                                                    <h:outputText value="Horario: "/>
+                                                                                    <h:commandLink class="btn btn-sm btn-info" 
+                                                                                                   action="#{fichasCalendariosMB.cambiarHorarioAsignadoFichaGeneral()}"
+                                                                                                   rendered="#{!fichasCalendariosMB.activarComponentes}">
+                                                                                        <h:outputText value="#{fila.horarioAsignado.descripcion}"/> 
+                                                                                    </h:commandLink>
+                                                                                    <h:outputText rendered="#{fichasCalendariosMB.activarComponentes}"
+                                                                                                  value="#{fila.horarioAsignado.descripcion}"/>
+                                                                                    <h:outputText value="Excepción: "/>
+                                                                                    <h:commandLink class="btn btn-primary btn-sm" 
+                                                                                                   action="#{fichasCalendariosMB.agregarMotivoFichaGeneral()}"
+                                                                                                   rendered="#{!fichasCalendariosMB.activarComponentes}">
+                                                                                        <h:outputText value="#{fila.codigoExcepcion.descripcionExcepcion == null or fila.codigoExcepcion.codigoExcepcion == 'VACI' ? 'Agregar' : fila.codigoExcepcion.descripcionExcepcion}"/>
+                                                                                    </h:commandLink> 
+                                                                                    <h:outputText rendered="#{fichasCalendariosMB.activarComponentes}"
+                                                                                                  value="#{fila.codigoExcepcion.descripcionExcepcion == null or fila.codigoExcepcion.codigoExcepcion == 'VACI' ? ' ' : fila.codigoExcepcion.descripcionExcepcion}"/>
+                                                                                </h:panelGrid>
+                                                                            </h:column>
+                                                                            <h:column class="col-sm-3">
+                                                                                <f:facet name="header">
+                                                                                    <h:panelGrid columns="2" 
+                                                                                                 class="table-condensed">
+                                                                                        <h:outputText value="Porcentaje Total: "/>
+                                                                                        <h:outputText id="porcentajeTotal" value="#{fichasCalendariosMB.porcentajeMultaTotal} %" 
+                                                                                                      style="#{fichasCalendariosMB.porcentajeMultaTotal > 0 ? 'color: red; font-weight: bold;' : 'color: green;'}"/>
+                                                                                        <h:outputText value="Monto Fijo Total: "/>
+                                                                                        <h:outputText id="montoFijoTotal" value="#{fichasCalendariosMB.montoFijoTotal}" 
+                                                                                                      style="#{fichasCalendariosMB.montoFijoTotal > 0 ? 'color: red; font-weight: bold;' : 'color: green;'}"/>
+                                                                                        <h:outputText value="Multas "/>
+                                                                                        <h:commandButton class="btn btn-danger pull-right" 
+                                                                                                         value=" Calcular % de Multas"
+                                                                                                         rendered="#{!fichasCalendariosMB.activarComponentes}"
+                                                                                                         action="#{fichasCalendariosMB.calcularMultas()}">
+                                                                                        </h:commandButton>
+                                                                                    </h:panelGrid>
+                                                                                </f:facet>
+                                                                                <h:panelGrid columns="2" 
+                                                                                             class="table-condensed">
+                                                                                    <h:outputText value="Porcentaje: "/>
+                                                                                    <h:commandLink rendered="#{!fichasCalendariosMB.activarComponentes}"
+                                                                                                   style="margin-right: 2px;" 
+                                                                                                   class="btn btn-sm #{fila.porcentajeMulta > 0 ? 'btn-danger' : 'btn-warning'}" 
+                                                                                                   action="#{fichasCalendariosMB.agregarProcentajeMultaFichaGeneral()}">
+                                                                                        <h:outputText value="#{fila.porcentajeMulta}"/> 
+                                                                                    </h:commandLink> 
+                                                                                    <h:outputText rendered="#{fichasCalendariosMB.activarComponentes}"
+                                                                                                  value="#{fila.porcentajeMulta}"
+                                                                                                  style="#{fila.porcentajeMulta > 0 ? 'color: red; font-weight: bold;' : 'color: green;'}"/>
+                                                                                    <h:outputText value="Monto Fijo: "/>
+                                                                                    <h:commandLink rendered="#{!fichasCalendariosMB.activarComponentes}"
+                                                                                                   style="margin-right: 2px;" 
+                                                                                                   class="btn btn-sm #{fila.montoFijo > 0 ? 'btn-danger' : 'btn-warning'}" 
+                                                                                                   action="#{fichasCalendariosMB.agregarMontoFijoMultaFichaGeneral()}">
+                                                                                        <h:outputText value="#{fila.montoFijo}"/> 
+                                                                                    </h:commandLink> 
+                                                                                    <h:outputText rendered="#{fichasCalendariosMB.activarComponentes}"
+                                                                                                  value="#{fila.montoFijo}"
+                                                                                                  style="#{fila.montoFijo > 0 ? 'color: red; font-weight: bold;' : 'color: green;'}"/>
+                                                                                </h:panelGrid>
+                                                                            </h:column>
+                                                                        </h:dataTable>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ui:fragment>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ui:fragment rendered="#{fichasCalendariosMB.mostrarComponentesPantallaBuscarRangoFechaCedula}">
+                                        <div class="modal-header">
+                                            <h:commandLink class="btn btn-primary" 
+                                                           action="#{fichasCalendariosMB.exportarPDFporCedulaMesAnio()}">
+                                                <i class="fa fa-file-pdf-o"></i> Descargar
+                                            </h:commandLink>
+                                            <span/>
+                                            <h:commandLink rendered="#{!fichasCalendariosMB.activarComponentes}"
+                                                           class="btn btn-success" 
+                                                           action="#{fichasCalendariosMB.guardarFichaPorCedula()}">
+                                                <i class="fa fa-save"></i> Guardar
+                                            </h:commandLink>
+                                        </div> 
+                                    </ui:fragment>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

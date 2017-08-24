@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/admin/main.xhtml">
+    <ui:define name="content">    
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-body">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h2>admin_funcionario_cambiar_horario_asignado_ficha_general.xhtml - Cambiar Horario Asignado Ficha General</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <h:form role="form">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-body">
+                                                    <ui:fragment rendered="#{fichasCalendariosMB.mostrarComponentesPantallaBuscarRangoFechaCedula}">
+                                                        <div class="row form-group col-sm-12">
+                                                            <label class="col-sm-2" for="cedula">Cedula:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-10" id="cedula" 
+                                                                          value="#{fichasCalendariosMB.funcionario.numeroDocumento}"/>                                                                
+                                                        </div>
+                                                        <div class="row form-group col-sm-12">
+                                                            <label class="col-sm-2" for="funcionario">Funcionario:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-10"
+                                                                          id="funcionario" 
+                                                                          value="#{fichasCalendariosMB.funcionario.apellidos}, #{fichasCalendariosMB.funcionario.nombres}"/>                                                                 
+                                                        </div>
+
+                                                        <div class="row form-group col-sm-12">
+                                                            <label class="col-sm-2" for="relacionLaboral">Relación Laboral:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-3" id="relacionLaboral" value="#{fichasCalendariosMB.funcionario.relacionLaboral.descripcion}"/>                                                              
+
+                                                            <label class="col-sm-3" for="horario">Horario Normal:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-4" id="horario" value="#{fichasCalendariosMB.funcionario.horarioNormal.descripcion}"/>
+                                                        </div>
+
+                                                        <div class="row form-group col-sm-12">
+                                                            <label class="col-sm-2" for="fechaActual">Fecha seleccionada:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-3" 
+                                                                          id="fechaActual" 
+                                                                          style="color: green"
+                                                                          value="#{fichasCalendariosMB.dateFormatFecha.format(fichasCalendariosMB.fichaCalendario.fichaCalendarioPK.fechaCalendario)}"/>  
+                                                            <label class="col-sm-3" for="dia">Dia:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-4" id="dia" value="#{fichasCalendariosMB.fichaCalendario.diaCalendarioLetra}"/>
+                                                        </div>
+
+                                                        <div class="row form-group col-sm-12">
+                                                            <label class="col-sm-2" for="horarioAsignado">Horario asignado:</label>
+                                                            <span/>
+                                                            <h:outputText class="col-sm-3" 
+                                                                          id="horarioAsignado"
+                                                                          value="#{fichasCalendariosMB.fichaCalendario.horarioAsignado.descripcion}"/>    
+
+                                                            <label class="col-sm-3" for="cambioHorarioAsignado">Cambiar horario asignado:</label>
+                                                            <span/>
+                                                            <h:selectOneMenu id="cambioHorarioAsignado"
+                                                                             value="#{fichasCalendariosMB.fichaCalendario.horarioAsignado.horario}" 
+                                                                             class="col-sm-4">
+                                                                <f:selectItems value="#{fichasCalendariosMB.horarios}" 
+                                                                               var="horario"
+                                                                               itemValue="#{horario.horario}" 
+                                                                               itemLabel="#{horario.descripcion}"/>
+                                                            </h:selectOneMenu>
+                                                        </div>
+
+                                                        <div class="row form-group col-sm-12">
+
+                                                            <label class="col-sm-12" for="motivo">Comentario(*).</label>
+                                                            <p:inputTextarea required="false" 
+                                                                             id="motivo" 
+                                                                             value="#{fichasCalendariosMB.fichaCalendario.motivoCambioHora}"
+                                                                             title="Comentario"
+                                                                             class="col-sm-12"
+                                                                             autoResize="true"
+                                                                             maxlength="65535"
+                                                                             counter="display"
+                                                                             counterTemplate="{0} caracteres disponibles."/>
+                                                            <h:outputText id="display" />
+                                                        </div>
+                                                    </ui:fragment>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-header">
+                                            <h:commandLink class="btn btn-default" 
+                                                           action="#{fichasCalendariosMB.cancelarModificarFichaGeneral()}" immediate="true">
+                                                <i class="fa fa-ban"></i> Cancelar
+                                            </h:commandLink>
+                                            <span/>
+                                            <h:commandLink class="btn btn-success" 
+                                                           action="#{fichasCalendariosMB.guardarCambiarHorarioAsignadoFichaGeneral()}" >
+                                                <i class="fa fa-save"></i> Guardar
+                                            </h:commandLink>
+                                        </div>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>   

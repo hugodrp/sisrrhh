@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/principal/main.xhtml">
+
+    <ui:define name="content">
+
+        <!-- Custom styles -->
+        <h:outputStylesheet name="form/css/style.css" />
+        <h:outputStylesheet name="form/css/style-responsive.css" />
+
+
+        <h:form class="login-form">        
+            <div class="login-wrap">
+                <div class="center">
+                    <p class="login-img">
+                        <i class="fa fa-edit"></i>                        
+                    </p>
+                    <span >Por favor complete el formulario y tenga en cuenta que los campos con <i class="fa fa-asterisk"></i> son obligatorios</span>
+                </div>
+                <h2 class="form-signin-heading">Datos Personales</h2> 
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Documento de identidad" 
+                                 value="#{mbSUsuarios.cedula}" 
+                                 a:placeholder=" Documento de identidad"/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Nombre" 
+                                 value="#{mbSUsuarios.nombre}" 
+                                 a:placeholder=" Nombre(s)"/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Apellido(s)" 
+                                 value="#{mbSUsuarios.apellido}" 
+                                 a:placeholder=" Apellido(s)"/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Dirección" 
+                                 value="#{mbSUsuarios.direccion}" 
+                                 a:placeholder=" Dirección"/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-square-o"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Cta. Cte. Ctral." 
+                                 value="#{mbSUsuarios.cuentaCorriente}" 
+                                 a:placeholder=" Cta. Cte. Ctral."/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-square-o"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Teléfono" 
+                                 value="#{mbSUsuarios.telefono}" 
+                                 a:placeholder=" Teléfono"/>
+                </div>
+                <h2 class="form-signin-heading">Información de Acceso</h2>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputText class="form-control" 
+                                 label="Correo electrónico" 
+                                 value="#{mbSUsuarios.correo}" 
+                                 a:placeholder=" Correo Electrónico">
+                        <f:validator validatorId="emailValidator"/>
+                    </h:inputText>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputSecret class="form-control" 
+                                   label="Contraseña" 
+                                   value="#{mbSUsuarios.contrasena1}"
+                                   a:placeholder=" Contraseña"/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                    <h:inputSecret class="form-control" 
+                                   label="Repetir Contraseña" 
+                                   value="#{mbSUsuarios.contrasena2}"
+                                   a:placeholder=" Repetir Contraseña"/>
+                </div>
+                <h:commandButton class="btn btn-send btn-lg btn-block" action="#{mbSUsuarios.btnRegistrar()}" value="Registrar"/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>   
